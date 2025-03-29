@@ -35,8 +35,8 @@ jobs:
       - name: Build and push Docker image with Buildx
         run: |
           docker buildx build \
-            --build-arg BUILD_IMAGE=golang:1.23-alpine \
-            --build-arg BASE_IMAGE=alpine:3.18 \
+            --build-arg BUILD_IMAGE=public.ecr.aws/docker/library/golang:1.23\
+            --build-arg BASE_IMAGE=public.ecr.aws/eks-distro-build-tooling/eks-distro-minimal-base-nonroot:2024-08-13-1723575672.2 \
             --platform=linux/amd64 \
             -t "${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com/${{ matrix.service }}:${{github.sha}}" \
             -t "${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com/${{ matrix.service }}:latest" \
